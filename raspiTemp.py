@@ -1,6 +1,11 @@
 import time
 import requests
 import json
+
+def log_to_file(filename, data):
+    with open(filename, 'a') as file:
+        file.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {data}\n")
+	    
 def main():
 	while True:
 			
@@ -15,6 +20,8 @@ def main():
 		time.sleep(1)
 		headers={"Content-Type":"application/json"}
 		data=json.dumps({"temp_raspi":temp_raspi})
+
+		log_to_file("tempRaspi.txt", data)
 		
 		url ="http://thingsboard.cloud/api/v1/9P7NpFIgXHpxfucsdFlv/telemetry"
 		try:

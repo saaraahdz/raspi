@@ -21,7 +21,7 @@ def main():
 		headers={"Content-Type":"application/json"}
 		data=json.dumps({"temp_raspi":temp_raspi})
 
-		log_to_file("tempRaspi.txt", data)
+		log_to_file("tempRaspi.json", data)
 		
 		url ="http://thingsboard.cloud/api/v1/9P7NpFIgXHpxfucsdFlv/telemetry"
 		try:

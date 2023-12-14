@@ -7,6 +7,10 @@ from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 import RPi.GPIO as GPIO
 from grove.grove_moisture_sensor import GroveMoistureSensor
 
+def log_to_file(filename, data):
+    with open(filename, 'a') as file:
+        file.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {data}\n")
+
 def main():
 	
 	# connect to alalog pin 2(slot A2)
@@ -46,6 +50,8 @@ def main():
 			time.sleep(1)
 			headers={"Content-Type":"application/json"}
 			data=json.dumps({"temperature":temp,"humidity":humi,"illuminance":light,"distance":distance})
+
+			log_to_file("raspiData.txt", data)
 			
 			url ="http://thingsboard.cloud/api/v1/9P7NpFIgXHpxfucsdFlv/telemetry"
 			try:
